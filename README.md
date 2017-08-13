@@ -1,5 +1,7 @@
 # Data Structures written in Golang
 
+[![Build Status](https://travis-ci.org/sebastianplesciuc/golang-data-structures.svg?branch=master)](https://travis-ci.org/sebastianplesciuc/golang-data-structures)
+
 Personal notes on implementing various data structures in Golang.
 
 1. Linked list
