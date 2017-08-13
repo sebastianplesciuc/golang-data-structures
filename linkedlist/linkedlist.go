@@ -11,6 +11,8 @@ type List interface {
 
 	Begin() Iterator
 	End() Iterator
+
+	Contains(Value) (bool, error)
 }
 
 // Iterator is actually a wrapper for a linked list node
@@ -68,6 +70,22 @@ func (ll *listContainer) End() Iterator {
 	return ll.lastIterator
 }
 
+// Contains returns true if a specified value is in the list
+func (ll *listContainer) Contains(value Value) (bool, error) {
+	for it := ll.Begin(); it != ll.End(); it = it.Next() {
+		eq, err := it.Get().Equals(value)
+		if err != nil {
+			return false, err
+		}
+
+		if eq == true {
+			return true, nil
+		}
+	}
+
+	return false, nil
+}
+
 // Append adds an node to the end of the list
 func (ll *listContainer) Append(data Value) {
 	// If this is the first value, create the first node
@@ -99,11 +117,7 @@ func (ll *listContainer) Append(data Value) {
 	}
 
 	ll.last = ll.last.next
-	ll.lastIterator = &listNode{
-		next:       nil,
-		previous:   ll.last,
-		parentList: ll,
-	}
+	ll.lastIterator.previous = ll.last
 }
 
 // New is the factory function for a linked List

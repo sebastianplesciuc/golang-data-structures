@@ -20,15 +20,23 @@ func (m *myLinkedListData) Equals(otherValue linkedlist.Value) (bool, error) {
 
 // LinkedList runs the example for a linked list
 func LinkedList() {
+	fmt.Println("Linked list examples")
+
+	// List creation
 	list := linkedlist.New()
 
+	// Element types
 	d1 := &myLinkedListData{data: "data1"}
 	d2 := &myLinkedListData{data: "data2"}
 
+	// Adding elements to the end of the list
 	list.Append(d1)
 	list.Append(d2)
 	list.Append(d2)
 
+	fmt.Println()
+
+	// Iteration and comparison
 	iterator := list.Begin()
 	for iterator != list.End() {
 		dataVal, ok := iterator.Get().(*myLinkedListData)
@@ -45,4 +53,19 @@ func LinkedList() {
 
 		iterator = iterator.Next()
 	}
+
+	// Checking existence
+	exists, err := list.Contains(d2)
+	if err != nil {
+		panic("Unexpected data type in list")
+	}
+
+	fmt.Printf("\nlist contains %s: %v\n", d2.data, exists)
+
+	exists, err = list.Contains(&myLinkedListData{data: "fake"})
+	if err != nil {
+		panic("Unexpected data type in list")
+	}
+
+	fmt.Printf("\nlist contains fake: %v\n", exists)
 }
