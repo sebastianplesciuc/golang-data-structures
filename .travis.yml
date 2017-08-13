@@ -1,0 +1,7 @@
+language: go
+go:
+  - release
+  - tip
+
+script:
+  - go test -cover $(go list ./... | grep -v /vendor/)
