@@ -91,12 +91,6 @@ func (ll *listContainer) Append(data Value) {
 		return
 	}
 
-	/*
-		finder := ll.first
-		for finder.next != nil {
-			finder = finder.next
-		}*/
-
 	ll.last.next = &listNode{
 		data:       data,
 		previous:   ll.last,

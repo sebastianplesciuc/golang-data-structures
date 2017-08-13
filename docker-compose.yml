@@ -1,0 +1,6 @@
+version: "3"
+services:
+  datastructs:
+    build: .
+    # hacky way to keep the container running so that you can ssh into it
+    entrypoint: bash -c 'echo "Container is running" && tail -f /dev/null'
